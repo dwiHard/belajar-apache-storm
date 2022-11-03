@@ -194,7 +194,7 @@ pom.xml plugin
           <archive>
             <manifest>
               <mainClass>
-                org.example.WordReaderTopology
+                org.example.TopologyMain
               </mainClass>
             </manifest>
           </archive>
