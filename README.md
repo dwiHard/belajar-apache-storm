@@ -76,10 +76,22 @@ bin/storm supervisor
 ```
 bin/storm ui
 ```
-lalu buka browser lalu ketikan di url http://localhost:8080, jika terjadi error 404 maka tambahkan 
+lalu buka browser lalu ketikan di url http://localhost:8080, 
+
+#### Problem
+
+jika terjadi error 404 maka tambahkan 
 ```
 ui.host: 0.0.0.0
 ui.port: 8081
+```
+error
+```
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+```
+fix add pada storm.yaml
+```
+JAVA_OPTS: "-Xmx256m"
 ```
 lalu untuk url diketikan http://localhost:8081, jika sudah selesai maka jalankan 
 ```
