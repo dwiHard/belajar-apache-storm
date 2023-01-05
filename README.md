@@ -225,3 +225,44 @@ pom.xml plugin
         <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
 ```
+
+
+#### Storm di service systemd
+nimbus
+```
+[Unit]
+Description=Apache Storm nimbus service
+Requires=zk.service
+After=zk.service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/hard/apache/apache-storm/bin/storm.py nimbus
+ExecStop=/usr/bin/python3 /home/hard/apache/apache-storm/bin/storm.py kill nimbus
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+supervisor
+```
+[Unit]
+Description=Apache Storm supervisor service
+Requires=zk.service
+After=zk.service
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/hard/apache/apache-storm/bin/storm.py supervisor
+ExecStop=/usr/bin/python3 /home/hard/apache/apache-storm/bin/storm.py kill supervisor
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+```
+sudo systemctl daemon-reload
+```
